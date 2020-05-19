@@ -1,18 +1,35 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+     <button @click="goAbout()">跳转到about组件</button>
+     <button @click="goIndex()">跳转到index组件</button>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+
+import {mapState} from 'vuex'
 
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
+
+  computed:{
+
+     ...mapState({
+       lg: 'login'
+    })
+  },
+
+   
+
+  methods: {
+
+    goAbout(){
+      this.$router.push({name:'About',query:{lg:this.lg}}).catch(err => {})
+    },
+    goIndex(){
+      this.$router.push({name:'Index'})
+    },
+
   }
 }
 </script>
